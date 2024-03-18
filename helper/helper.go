@@ -84,6 +84,13 @@ func ImageExists(filename string) bool {
 	return !info.IsDir()
 }
 
+// IsWebpRequestFilename will return TRUE if filename extension = webp
+func IsWebpRequestFilename(filename string) bool {
+	split := strings.Split(filename, ".")
+	extension := split[len(split)-1]
+	return strings.EqualFold(extension, "webp")
+}
+
 func CheckAllowedType(imgFilename string) bool {
 	if config.Config.AllowedTypes[0] == "*" {
 		return true

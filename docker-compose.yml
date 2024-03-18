@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  app:
+    container_name: webp-server-go
+    image: webp-server-go:latest
+    ports:
+      - 9988:9988
+    restart: on-failure
+    volumes:
+      - /var/www/html/jec-admin/storage/app/public:/opt/pics
+    networks:
+      - webp-server-go
+networks:
+  webp-server-go: 

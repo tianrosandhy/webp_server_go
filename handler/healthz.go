@@ -5,5 +5,5 @@ import (
 )
 
 func Healthz(c *fiber.Ctx) error {
-	return c.SendString("WebP Server Go up and running!🥳")
+	return c.SendString("OK")
 }

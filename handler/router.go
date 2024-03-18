@@ -145,11 +145,16 @@ func Convert(c *fiber.Ctx) error {
 	// Check the original image for existence,
 	if !helper.ImageExists(rawImageAbs) {
 		helper.DeleteMetadata(reqURIwithQuery, targetHostName)
-		msg := "Image not found!"
-		_ = c.Send([]byte(msg))
-		log.Warn(msg)
-		_ = c.SendStatus(404)
-		return nil
+
+		// send from fallback image : "blank.webp"
+		c.Set("Content-Type", "image/webp")
+		return c.SendFile("./blank.webp")
+	}
+
+	if helper.IsWebpRequestFilename(filename) {
+		// if the request is for webp, we'll just send it back
+		c.Set("Content-Type", "image/webp")
+		return c.SendFile(rawImageAbs)
 	}
 
 	avifAbs, webpAbs := helper.GenOptimizedAbsPath(metadata, targetHostName)
