@@ -18,7 +18,7 @@ RUN apt update && apt install --no-install-recommends libvips ca-certificates li
 
 COPY --from=builder /build/webp-server  /usr/bin/webp-server
 COPY --from=builder /build/config.json /etc/config.json
-COPY --from=builder /build/blank.webp /usr/bin/blank.webp
+COPY --from=builder /build/blank.webp /opt/blank.webp
 
 WORKDIR /opt
 VOLUME /opt/exhaust
