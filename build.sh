@@ -8,6 +8,5 @@ fi
 builddate="$(date '+%Y-%m-%d_%H:%M:%S')"
 echo $builddate
 
-docker build -t webp-server-go:$ver --build-arg VER=$ver --build-arg BUILDDATE=$builddate .
-docker tag webp-server-go:$ver webp-server-go:latest
+docker build -t webp-server-go:latest --build-arg VER=$ver --build-arg BUILDDATE=$builddate .
 docker system prune -f
