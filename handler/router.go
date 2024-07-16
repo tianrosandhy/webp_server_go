@@ -50,6 +50,12 @@ func Convert(c *fiber.Ctx) error {
 
 	log.Debugf("Incoming connection from %s %s %s", c.IP(), reqHostname, reqURIwithQuery)
 
+	if filename == "" || filename == "/" {
+		// send from fallback image : "blank.webp"
+		c.Set("Content-Type", "image/webp")
+		return c.SendFile("./blank.webp")
+	}
+
 	if !helper.CheckAllowedType(filename) {
 		msg := "File extension not allowed! " + filename
 		log.Warn(msg)
