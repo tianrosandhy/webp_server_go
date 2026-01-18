@@ -179,5 +179,6 @@ func Convert(c *fiber.Ctx) error {
 	c.Set("Content-Type", contentType)
 
 	c.Set("X-Compression-Rate", helper.GetCompressionRate(rawImageAbs, finalFilename))
+	c.Set("Cache-Control", "max-age=86400")
 	return c.SendFile(finalFilename)
 }
